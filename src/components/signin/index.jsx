@@ -1,14 +1,17 @@
-import { useForm } from "react-hook-form";
-import { Input } from "../common/Input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+import { Input } from '../common/Input';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/thunk/auth.thunk';
 
 const loginSchema = yup.object().shape({
-  email: yup.string().required("Email is required"),
-  password: yup.string().required("Password is required"),
+  email: yup.string().required('Email is required'),
+  password: yup.string().required('Password is required')
 });
 
 function SignIn() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -20,10 +23,10 @@ function SignIn() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (event,data)=> {
-    event.preventDefault();
-   console.log("DATA ON LOGIN SUBMIT", data);
-  }
+  const onSubmit = (data) => {
+    console.log('DATA ON LOGIN SUBMIT', data);
+    dispatch(loginUser({payload : data}))
+  };
 
   return (
     <section className="account-section">
