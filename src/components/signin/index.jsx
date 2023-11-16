@@ -30,7 +30,7 @@ function SignIn() {
 
   return (
     <section className="account-section">
-      <div className="flex flex-col items-center gap-4 p-4">
+      <div className="flex flex-col items-center justify-center gap-4 p-4 h-[50vh]">
         <h4 className="text-2xl font-bold">Login</h4>
         <form
           className="flex flex-col gap-4 w-full lg:w-[30%]"

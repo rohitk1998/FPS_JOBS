@@ -179,13 +179,13 @@ function SignUp() {
   return (
     <section className="account-section">
       <div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 h-[50vh]">
           <h4 className="text-2xl font-bold">Register Your Account</h4>
           <form
             className="flex flex-col gap-4 w-[80%]"
             onSubmit={handleSubmit(submitHandler)}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Input
                 label="First Name"
                 name="first_name"
