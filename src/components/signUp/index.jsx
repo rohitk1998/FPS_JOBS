@@ -179,7 +179,7 @@ function SignUp() {
   return (
     <section className="account-section">
       <div>
-        <div className="flex flex-col items-center justify-center gap-4 h-[50vh]">
+        <div className="flex flex-col items-center justify-center gap-4 xl:h-[70vh] lg:h-[70vh] md:h-[70vh] sm:h-auto h-auto">
           <h4 className="text-2xl font-bold">Register Your Account</h4>
           <form
             className="flex flex-col gap-4 w-[80%]"
