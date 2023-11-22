@@ -734,7 +734,7 @@ input[type="color"],
 }
 
 .sub-categorie .pop-up {
-  padding: 24px;
+  padding: 12px;
   border: 1px solid #e5e5e5;
   width: 288px;
   text-align: left;
@@ -755,7 +755,7 @@ input[type="color"],
 
 .sub-categorie ul.pop-up > li:hover,
 .sub-categorie ul.pop-up > li.active {
-  background-color: #f5f5f2;
+  background-color: #f9f9f9;
 }
 
 .sub-categorie ul.pop-up li:hover span::before,
@@ -796,7 +796,7 @@ input[type="color"],
 .sub-categorie .group-menu-category {
   position: absolute;
   top: 3%;
-  right: -167%;
+  left: 100%;
   background: #ffffff;
   border-radius: 0px 0px 8px 0px;
   border: 1px solid #e5e5e5;
@@ -817,7 +817,7 @@ input[type="color"],
 .sub-categorie .group-menu-category::after {
   content: "";
   position: absolute;
-  left: 25px;
+  left: 0px;
   top: 0;
   width: 2px;
   height: 100%;
@@ -832,7 +832,7 @@ input[type="color"],
 
 .sub-categorie ul.pop-up > li:hover .group-menu-category .menu {
   opacity: 1;
-  transition-delay: 0.15s;
+  transition-delay: 0.5s;
 }
 
 .sub-categorie .group-menu-category h6 {
@@ -851,7 +851,7 @@ input[type="color"],
 }
 
 .sub-categorie .group-menu-category .menu {
-  width: 240px;
+  width: fit-content;
   padding: 0 24px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -872,7 +872,6 @@ input[type="color"],
 .sticky-area-wrap .header-ct-center {
   flex-grow: 1;
   justify-content: center;
-  /*width: 100%;*/
   display: flex;
   align-items: center;
   padding-left: 178px;

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { Collapse } from "react-collapse";
 import Header2 from "../header/Header2";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
+  const { userToken } = useSelector((state)=> state.auth)
   const [toggle, setToggle] = useState({
     key: "",
     status: false,

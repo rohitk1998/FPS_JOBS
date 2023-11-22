@@ -1,23 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerNewUser } from '../thunk/auth.thunk';
 
-const initialState  = {
-  registerObj : {},
-  userToken : ''
+const initialState = {
+  userToken: false,
+  registredMobileOrEmail:'',
+  isUserRegistered: false,
+  isOtpVerified: false,
 };
 
-const authSlice  = createSlice({
-  name: 'authSlice',
+const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
-    setRegisterObj : (state , action ) => {
-      state.registerObj  = action.payload
+    setUserToken: (state, action) => {
+      state.userToken = action.payload;
     },
-    setUserToken : (state, action ) => {
-      state.userToken = action.payload
+    setIsUserRegistered: (state, action) => {
+      state.isUserRegistered = action.payload;
     },
-  }
+    setIsOtpVerified: (state, action) => {
+      state.isOtpVerified = action.payload;
+    },
+    setRegistredMobileOrEmail : (state,action) => {
+      state.registredMobileOrEmail = action.payload
+    }
+  },
 });
 
-export const { setRegisterObj,setOtpVerified,setCountryList,setUserToken } = authSlice.actions;
+export const { setUserToken, setIsUserRegistered, setIsOtpVerified,setRegistredMobileOrEmail } =
+  authSlice.actions;
 export default authSlice.reducer;

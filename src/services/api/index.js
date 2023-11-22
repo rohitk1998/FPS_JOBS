@@ -29,14 +29,13 @@ async function apiHandler(path, method = "GET", params = {}, Headers) {
             headers: headers,
           })
           .then((res) => res)
-          .catch((e) => {
-            return e;
+          .catch((error) => {
+            throw error
           });
-      } catch (err) {
-        console.log(err, "Error in Api");
+      } catch (error) {
+        console.log(error, "Error in Api");
+        throw error.response.data
       }
-      break;
-
     default:
   }
 }

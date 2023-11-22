@@ -1,7 +1,7 @@
 import { Layout } from "../components/Layout";
-import SignIn from "../components/signin";
+import SignIn from "../components/signIn";
 
-function Login(props) {
+function Login() {
   return (
     <Layout>
       <SignIn />

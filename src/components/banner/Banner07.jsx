@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import SelectLocation from "../dropdown";
-import { apiHandler } from "../../services/api";
-import { getLocations } from "../../services/api/constants";
-import { CMSModal } from "../../context";
+import React, { useContext, useEffect, useState } from 'react';
+import SelectLocation from '../dropdown';
+import { apiHandler } from '../../services/api';
+import { getLocations } from '../../services/api/constants';
+import { CMSModal } from '../../context';
 
 Banner07.propTypes = {};
 
@@ -14,9 +14,9 @@ function Banner07(props) {
   }, []);
   const fetchLocations = async () => {
     setLoading(true);
-    const res = await apiHandler(`${getLocations}`, "GET");
-    console.log(res.data, "res");
-    if (res.data.status === "success") {
+    const res = await apiHandler(`${getLocations}`, 'GET');
+    console.log(res.data, 'res');
+    if (res.data.status === 'success') {
       setLocations(res.data.cities);
       setLoading(false);
     }
@@ -27,9 +27,11 @@ function Banner07(props) {
         <div className="row">
           <div className="col-lg-12">
             <div className="content">
-              <div className="heading text-center">
-                <h2 className="text-white">Find the job that fits your life</h2>
-                <p className="text-white">
+              <div className="text-center heading">
+                <h2 className="text-gray-800 text-md">
+                  Find the job that fits your life
+                </h2>
+                <p className="text-gray-800 text-md">
                   Resume-Library is a true performance-based job board. Enjoy
                   custom hiring products and access to up to 10,000 new resume
                   registrations daily, with no subscriptions or user licences.
@@ -37,13 +39,13 @@ function Banner07(props) {
               </div>
               <div className="icon ic1 ani3">
                 <img
-                  src={require("../../assets/images/review/icon6.png")}
+                  src={require('../../assets/images/review/icon6.png')}
                   alt="images"
                 />
               </div>
               <div className="icon ic2 ani6">
                 <img
-                  src={require("../../assets/images/review/icon5.png")}
+                  src={require('../../assets/images/review/icon5.png')}
                   alt="images"
                 />
               </div>

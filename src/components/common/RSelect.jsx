@@ -1,17 +1,17 @@
 export const RSelect = ({ label, option, setValue, error, setError }) => {
   return (
-    <div className="flex flex-col gap-2 h-20">
-      <h2 className="text-left font-semibold">{label}</h2>
+    <div className="flex flex-col h-20 gap-2">
+      <h2 className="font-semibold text-left">{label}</h2>
       <select
-        className="p-2  outline-none rounded bg-transparent"
+        className="p-2 bg-transparent rounded outline-none"
         style={{ border: "2px solid lightgray" }}
         onChange={(e) => {
           setValue(e.target.value);
           setError("");
         }}
       >
-        <option disabled selected>
-          Select Your Option
+        <option value={''}>
+          <p className="text-gray-300">Select Your {label}</p>
         </option>
 
         {option.length > 0 &&
@@ -21,7 +21,7 @@ export const RSelect = ({ label, option, setValue, error, setError }) => {
             </option>
           ))}
       </select>
-      <p className="p-1 text-red-500 font-semibold">{error && error}</p>
+      <p className="p-1 font-semibold text-red-600">{error && error}</p>
     </div>
   );
 };
