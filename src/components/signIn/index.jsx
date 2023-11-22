@@ -7,7 +7,7 @@ import { loginUser } from '../../redux/thunk/auth.thunk';
 
 const loginSchema = yup.object().shape({
   email: yup.string().required('Email is required'),
-  password: yup.string().required('Password is required')
+  password: yup.string().required('Password is required'),
 });
 
 function SignIn() {
@@ -25,12 +25,12 @@ function SignIn() {
 
   const onSubmit = (data) => {
     console.log('DATA ON LOGIN SUBMIT', data);
-    dispatch(loginUser({payload : data}))
+    dispatch(loginUser({ payload: data }));
   };
 
   return (
     <section className="account-section">
-      <div className="flex flex-col items-center gap-4 p-4">
+      <div className="flex flex-col items-center justify-center gap-4 p-4 h-[50vh]">
         <h4 className="text-2xl font-bold">Login</h4>
         <form
           className="flex flex-col gap-4 w-full lg:w-[30%]"
@@ -51,7 +51,7 @@ function SignIn() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-[50%] bg-[#a83359] p-2 text-white border-none rounded font-semibold"
+              className="w-[50%] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
             >
               Login
             </button>

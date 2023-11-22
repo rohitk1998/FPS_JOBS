@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home_v7 from './pages/Home_v7';
 import JobList from './pages/JobList';
 import Employer_v1 from './pages/Employer_v1';
@@ -44,19 +44,15 @@ import Pricing from './pages/Pricing';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import ContactUs from './pages/ContactUs';
-import ScrollToTop from './ScrollToTop';
-import Preloader from './components/preloader';
-import { CMSModal } from './context';
 import './index.css';
 import JobSingle from './pages/JobSingle';
-import { persister, store } from './redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
+import { PrivateRoute } from './routes/privateRoute';
+import { PublicRoute } from './routes/publicRoute';
+import { useSelector } from 'react-redux';
+import { CustomToast } from './components/CustomToast';
 
 const App = () => {
-  let routes = useRoutes([
-    { path: '/', element: <Home_v7 /> },
-
+  let privateRoute = [
     { path: '/jobList', element: <JobList /> },
     // { path: "/job-grid", element: <Joblist_v2 /> },
     // { path: "/job-list-sidebar", element: <Joblist_v3 /> },
@@ -107,28 +103,34 @@ const App = () => {
     { path: '/faqs', element: <Faqs /> },
     { path: '/termsofuse', element: <Termsofuse /> },
     { path: '/pricing', element: <Pricing /> },
+    { path: '/contactus', element: <ContactUs /> },
+  ];
+
+  const publicRoutes = [
     { path: '/login', element: <Login /> },
     { path: '/createaccount', element: <CreateAccount /> },
-    { path: '/contactus', element: <ContactUs /> },
-  ]);
-  return routes;
-};
+  ];
 
-const AppWrapper = () => {
-  const { loading } = useContext(CMSModal);
+  const { success, error, message } = useSelector((state) => state.toast);
+
   return (
-    <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persister}>
-          <Router>
-            <ScrollToTop />
-            <App />
-          </Router>
-          {loading && <Preloader />}
-        </PersistGate>
-      </Provider>
-    </>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home_v7 />} exact />
+        <Route path="/" element={<PrivateRoute />}>
+          {privateRoute.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Route>
+        <Route path="/" element={<PublicRoute />}>
+          {publicRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Route>
+      </Routes>
+      <CustomToast success={success} error={error} message={message} />
+    </div>
   );
 };
 
-export default AppWrapper;
+export default App;

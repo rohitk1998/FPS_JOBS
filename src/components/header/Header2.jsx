@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import avt from "../../assets/images/user/avatar/image-01.jpg";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import avt from '../../assets/images/user/avatar/image-01.jpg';
+import { Link, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getCategories,
+  getCategorySubjects,
+} from '../../redux/thunk/app.thunk';
+import { setCategories, setSubjects } from '../../redux/slice/app.slice';
 
 Header2.propTypes = {};
 
-function Header2({ clname = "", handleMobile }) {
+function Header2({ clname = '', handleMobile }) {
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.auth);
+  const { categories, subjects } = useSelector((state) => state.app);
   const [activeIndex, setActiveIndex] = useState(null);
   const handleDropdown = (index) => {
     setActiveIndex(index);
@@ -14,7 +23,8 @@ function Header2({ clname = "", handleMobile }) {
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
-    document.addEventListener("scroll", () => {
+    dispatch(getCategories());
+    document.addEventListener('scroll', () => {
       const scrollCheck = window.scrollY > 100;
       if (scrollCheck !== scroll) {
         setScroll(scrollCheck);
@@ -22,10 +32,12 @@ function Header2({ clname = "", handleMobile }) {
     });
   }, []);
 
+  console.log('subjects', subjects);
+
   return (
     <header
       id="header"
-      className={`header header-default ${scroll ? "is-fixed is-small" : ""}`}
+      className={`header header-default ${scroll ? 'is-fixed is-small' : ''}`}
     >
       <div className="tf-container ct2">
         <div className="row">
@@ -48,381 +60,46 @@ function Header2({ clname = "", handleMobile }) {
                   </Link>
                   <div className="sub-categorie">
                     <ul className="pop-up">
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-1"></span>Design &
-                          Creative
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Digital marketing</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Development & IT</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Music & Audio</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">Adobe Photoshop</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">
-                                  Android Developer
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">CSS, Html</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-8"></span>Digital
-                          Marketing
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Digital marketing</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Development & IT</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-2"></span>Development
-                          & IT
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Development & IT</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Music & Audio</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">
-                                  Android Developer
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Adobe Photoshop</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">CSS, Html</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-3"></span>Music &
-                          Audio
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Digital marketing</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">
-                                  Android Developer
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Adobe Photoshop</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-4"></span>Finance &
-                          Accounting
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Development & IT</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Music & Audio</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-5"></span>Programming
-                          & Tech
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Digital marketing</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Music & Audio</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">Adobe Photoshop</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">adobe XD</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">CSS, Html</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-6"></span>Video &
-                          Animation
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">Design & Creative</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Digital marketing</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">Adobe Photoshop</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">CSS, Html</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <Link to="#">
-                          <span className="icon-categorie-7"></span>Writing &
-                          translation
-                        </Link>
-                        <div className="group-menu-category">
-                          <div className="menu left">
-                            <h6>Top Categories</h6>
-                            <ul>
-                              <li>
-                                <Link to="/joblist_v1">
-                                  Finance & Accounting
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">Programming & Tech</Link>
-                              </li>
-                              <li>
-                                <Link to="/joblist_v1">video & Animation</Link>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="menu right">
-                            <h6>Top Skills</h6>
-                            <ul>
-                              <li>
-                                <Link to="/jobsingle_v1">Figma</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">CSS, Html</Link>
-                              </li>
-                              <li>
-                                <Link to="/jobsingle_v1">BA</Link>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
+                      {Array.isArray(categories) &&
+                        categories.map((category) => {
+                          return (
+                            <li>
+                              <Link
+                                to="#"
+                                onMouseEnter={() =>
+                                  dispatch(
+                                    getCategorySubjects({
+                                      categoryId: category.ID,
+                                    })
+                                  )
+                                }
+                              >
+                                <div className="flex items-center justify-start">
+                                  <img
+                                    src={category.image}
+                                    alt={category.category}
+                                    className="w-[40px] h-[40px]"
+                                  />
+                                  <p className="text-[14px] ml-10">
+                                    {category.category}
+                                  </p>
+                                </div>
+                              </Link>
+                              <div className="flex-wrap absolute top-[0%] left-[100%] bg-white w-[100%] h-[100%] min-w-[300px] overflow-y-scroll">
+                                {Array.isArray(subjects) &&
+                                  subjects.map((subject) => {
+                                    return (
+                                      <div className="mt-3 ml-5">
+                                        <p className="text-[13px] font-normal text-gray-700 font-md">
+                                          {subject.function}
+                                        </p>
+                                      </div>
+                                    );
+                                  })}
+                              </div>
+                            </li>
+                          );
+                        })}
                     </ul>
                   </div>
                 </div>
@@ -670,12 +347,16 @@ function Header2({ clname = "", handleMobile }) {
                           </li>
                         </ul>
                       </li> */}
-                      <li className="menu-item">
-                        <Link to="/createAccount">SignUp </Link>
-                      </li>
-                      <li className="menu-item">
-                        <Link to="/login">Login </Link>
-                      </li>
+                      {!userToken && (
+                        <li className="menu-item">
+                          <Link to="/createAccount">SignUp </Link>
+                        </li>
+                      )}
+                      {!userToken && (
+                        <li className="menu-item">
+                          <Link to="/login">Login </Link>
+                        </li>
+                      )}
                     </ul>
                   </nav>
                 </div>

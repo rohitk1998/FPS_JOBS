@@ -15,10 +15,10 @@ export const Input = ({ label, type, name, error, register, disabled }) => {
           type={type}
           className="w-full bg-transparent outline-none"
           disabled={disabled}
-          autoComplete={false}
+          autoComplete="false"
         />
       </div>
-      <p className="p-1 font-semibold text-red-500">{error && error}</p>
+      <p className="p-1 font-semibold text-red-600">{error && error}</p>
     </div>
   );
 };
