@@ -13,9 +13,10 @@ import {
   getStates,
   signup,
 } from '../../services/api/constants';
-import { CMSModal } from '../../context';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../redux/thunk/auth.thunk';
+import { setLoading } from '../../redux/slice/loading.slice';
+
 const registerSchema = yup.object().shape({
   first_name: yup.string().required('First Name is required'),
   last_name: yup.string().required('Last Name is required'),
@@ -111,7 +112,6 @@ function SignUp() {
   });
   const selectedState = watch('state');
   const selectedIndustry = watch('industry');
-  const { setLoading } = useContext(CMSModal);
   const [stateData, setStateData] = useState([]);
   const [citiesData, setCitiesData] = useState([]);
   const [industriesData, setIndustriesData] = useState([]);
@@ -281,11 +281,10 @@ function SignUp() {
                 setError={(data) => setError('expected_salary', data)}
               />
             </div>
-
             <div className="flex justify-center mt-10">
               <button
                 type="submit"
-                className="w-[50%] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
+                className="w-[50%] shadow-md h-[50px] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
               >
                 Register
               </button>

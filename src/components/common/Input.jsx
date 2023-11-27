@@ -3,7 +3,7 @@ import React from "react";
 export const Input = ({ label, type, name, error, register, disabled }) => {
   return (
     <div className="flex flex-col gap-1">
-      <label className="font-semibold text-left">{label}</label>
+      <label className="ml-1 font-semibold text-left">{label}</label>
       <div className="p-2 rounded" style={{border:"2px solid lightgray"}}>
         <input
           name={label}
@@ -18,7 +18,7 @@ export const Input = ({ label, type, name, error, register, disabled }) => {
           autoComplete="false"
         />
       </div>
-      <p className="p-1 font-semibold text-red-600">{error && error}</p>
+      <p className="p-1 font-semibold text-red-700">{error && error}</p>
     </div>
   );
 };

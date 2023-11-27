@@ -23,7 +23,7 @@ function Jobs(props) {
           </div>
         </div>
         <div className="row wow fadeInUp">
-          {data.slice(0, 6).map((idx) => (
+          {Array.isArray(data) && data.slice(0, 6).map((idx) => (
             <div key={idx.id} className="col-lg-6 ">
               <div className="features-job">
                 <div className="job-archive-header">

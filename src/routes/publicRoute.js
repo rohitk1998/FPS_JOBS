@@ -1,12 +1,13 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Navigate, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-export function PublicRoute() { 
-  const { userToken } = useSelector((state) => state.auth )
+export function PublicRoute() {
+  const { userToken } = useSelector((state) => state.auth);
 
-  return !userToken  ? (
-        <Outlet/>
-  ) : (
-    <Navigate to={"/"} />
-  );
+  useEffect(() => {
+    console.log('PUBLIC', userToken);
+  }, [userToken]);
+
+  return !userToken ? <Outlet /> : <Navigate to="/" />;
 }

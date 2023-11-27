@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiHandler } from '../../services/api';
-import { signup, verificationOtp } from '../../services/api/constants';
+import { login, signup, verificationOtp } from '../../services/api/constants';
 import {
   setIsOtpVerified,
+  setIsUserLogin,
   setIsUserRegistered,
   setRegistredMobileOrEmail,
   setUserToken,
@@ -13,22 +14,35 @@ const userBaseUrl = process.env.REACT_APP_API_URL;
 
 export const loginUser = createAsyncThunk(
   'authSlice/loginUser',
-  async ({ payload }, { dispatch }) => {
+  async (data, { dispatch }) => {
     console.log('LOGIN API CALL STARTED', userBaseUrl);
     try {
-      const response = await fetch(userBaseUrl + '/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json();
-      if (data) {
-        console.log('DATA IN LOGIN USER', data);
+      const response = await apiHandler(`${login}`, 'POST', data, true);
+      console.log('DATA IN LOGIN', response.data);
+      if (response.data.success && response.data.statusCode == 200) {
+        if (typeof response.data.data == 'object') {
+          dispatch(setUserToken(true));
+        } else {
+          dispatch(setIsUserLogin(true));
+          dispatch(setRegistredMobileOrEmail(true));
+        }
+        dispatch(
+          setToast({
+            message: response.data.message,
+            success: true,
+            error: false,
+          })
+        );
       }
     } catch (error) {
       console.log('ERROR IN LOGIN API', error);
+      dispatch(
+        setToast({
+          message: error.data,
+          success: false,
+          error: true,
+        })
+      );
     }
   }
 );
@@ -43,15 +57,24 @@ export const registerUser = createAsyncThunk(
         console.log('DATA IN REGISTER USER', response.data);
         dispatch(setIsUserRegistered(true));
         dispatch(setRegistredMobileOrEmail(data.mobile));
+        dispatch(
+          setToast({
+            message: response.data.message,
+            success: true,
+            error: false,
+          })
+        );
       }
     } catch (error) {
-      console.log("else error ");
+      console.log('else error ');
       console.log('ERROR IN REGISTER API', error);
-      dispatch(setToast({
-        message: error.data,
-        success: false,
-        error: true,
-      }))
+      dispatch(
+        setToast({
+          message: error.data,
+          success: false,
+          error: true,
+        })
+      );
     }
   }
 );
@@ -63,17 +86,19 @@ export const verifyRegisterOtp = createAsyncThunk(
     try {
       const response = await apiHandler(`${verificationOtp}`, 'POST', data);
       if (response.data.success && response.data.statusCode == 200) {
-      console.log('DATA IN VERIFY OTP USER', response.data);
-      dispatch(setIsOtpVerified(true));
-      dispatch(setUserToken(true));
+        console.log('DATA IN VERIFY OTP USER', response.data);
+        dispatch(setIsOtpVerified(true));
+        dispatch(setUserToken(true));
       }
     } catch (error) {
       console.log('ERROR IN  VERIFY OTP API', error);
-      dispatch(setToast({
-        message: error.data,
-        success: false,
-        error: true,
-      }))
+      dispatch(
+        setToast({
+          message: error.message,
+          success: false,
+          error: true,
+        })
+      );
     }
   }
 );

@@ -8,6 +8,7 @@ import {
   getCategorySubjects,
 } from '../../redux/thunk/app.thunk';
 import { setCategories, setSubjects } from '../../redux/slice/app.slice';
+import { setUserToken } from '../../redux/slice/auth.slice';
 
 Header2.propTypes = {};
 
@@ -43,7 +44,10 @@ function Header2({ clname = '', handleMobile }) {
         <div className="row">
           <div className="col-md-12">
             <div className="sticky-area-wrap">
-              <div className="header-ct-left">
+              <div
+                className="header-ct-left "
+                onMouseEnter={() => dispatch(setSubjects([]))}
+              >
                 <div id="logo" className="logo">
                   <Link to="/">
                     <img
@@ -85,18 +89,20 @@ function Header2({ clname = '', handleMobile }) {
                                   </p>
                                 </div>
                               </Link>
-                              <div className="flex-wrap absolute top-[0%] left-[100%] bg-white w-[100%] h-[100%] min-w-[300px] overflow-y-scroll">
-                                {Array.isArray(subjects) &&
-                                  subjects.map((subject) => {
-                                    return (
-                                      <div className="mt-3 ml-5">
-                                        <p className="text-[13px] font-normal text-gray-700 font-md">
-                                          {subject.function}
-                                        </p>
-                                      </div>
-                                    );
-                                  })}
-                              </div>
+                              {subjects?.length > 0 && (
+                                <div className="flex-wrap absolute top-[0%] left-[100%] bg-white w-[100%] h-[100%] min-w-[300px] overflow-y-scroll">
+                                  {Array.isArray(subjects) &&
+                                    subjects.map((subject) => {
+                                      return (
+                                        <div className="mt-3 ml-5">
+                                          <p className="text-[13px] font-normal text-gray-700 font-md">
+                                            {subject.function}
+                                          </p>
+                                        </div>
+                                      );
+                                    })}
+                                </div>
+                              )}
                             </li>
                           );
                         })}
@@ -112,7 +118,7 @@ function Header2({ clname = '', handleMobile }) {
                         <Link to="/">Home </Link>
                       </li>
                       <li className="menu-item">
-                        <Link to="/jobList">Find jobs </Link>
+                        <Link to="/jobs">Find jobs </Link>
                       </li>
 
                       {/* <li className="menu-item menu-item-has-children sub3">
@@ -355,6 +361,13 @@ function Header2({ clname = '', handleMobile }) {
                       {!userToken && (
                         <li className="menu-item">
                           <Link to="/login">Login </Link>
+                        </li>
+                      )}
+                      {userToken && (
+                        <li className="menu-item">
+                          <Link to={'/login'} onClick={() => dispatch(setUserToken(false))}>
+                            <span className='text-gray-500 text-md'>Logout</span>
+                          </Link>
                         </li>
                       )}
                     </ul>

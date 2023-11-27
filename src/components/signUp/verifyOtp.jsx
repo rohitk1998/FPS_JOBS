@@ -97,7 +97,7 @@ export const VerifyOtp = () => {
           </div>
           <button
             type="submit"
-            className="w-[30%] max-w-[300px] min-w-[150px] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
+            className="w-[30%] shadow-md h-[50px] max-w-[300px] min-w-[150px] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
           >
             Verify OTP
           </button>

@@ -7,6 +7,8 @@ export const getJobTitle = 'v3/job-title';
 
 //post
 export const signup = 'register';
+export const login = 'login'
 export const verificationOtp = 'varification-otp';
 export const categoryList = 'category-list'
-export const categorySubject = 'subjects'
+export const categorySubject = 'subjects';
+export const jobsList = 'v2/searchJobs';
