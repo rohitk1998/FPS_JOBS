@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   categories : [] , 
-  subjects : []
+  subjects : [] , 
+  featuredJobs : []
 };
 
 export const slice = createSlice({
@@ -16,10 +17,14 @@ export const slice = createSlice({
     setSubjects : (state, action) => {
         console.log("subjects",action.payload);
         state.subjects = action.payload
+      },
+      setfeaturedJobs : (state, action) => {
+        console.log("setfeaturedJobs",action.payload);
+        state.featuredJobs = action.payload
       }
   },
 });
 
-export const { setCategories,setSubjects } = slice.actions;
+export const { setCategories,setSubjects,setfeaturedJobs } = slice.actions;
 
 export default slice.reducer;

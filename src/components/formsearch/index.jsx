@@ -1,35 +1,64 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import SelectLocation from "../dropdown";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import SelectLocation from '../dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchObj } from '../../redux/slice/job.slice';
+import { searchJobs } from '../../redux/thunk/job.thunk';
 
 FormSearch.propTypes = {};
 
 function FormSearch(props) {
+  const { jobLocations } = useSelector((state) => state.job);
+  const { searchObj } = useSelector((state) => state.job);
   const [isOpen, setIsOpen] = useState(null);
+  const [searchObject, setSearchObject] = useState({
+    name: '',
+    keyword: '',
+  });
+
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    console.log('searchObject', searchObject);
+    dispatch(setSearchObj(searchObject))
+    dispatch(searchJobs({ name : searchObject.name , keyword : searchObject.keyword?.value }));
   };
 
   return (
-    <section className="form-sticky stc1">
-      <div className="tf-container mt-10">
+    <section className="form-sticky stc1 ">
+      <div className="p-4 mt-10 tf-container bg-gray-50 rounded-xl">
         <div className="job-search-form inner-form-map st1">
-          <form action="/job-list-sidebar">
             <div className="row-group-search">
               <div className="form-group-1">
                 <input
                   type="text"
+                  value={searchObject.name}
                   className="input-filter-search"
                   placeholder="Job title, key words or company"
+                  onChange={(event) =>
+                    setSearchObject({
+                      ...searchObject,
+                      name: event.target.value,
+                    })
+                  }
                 />
                 <span className="icon-search search-job"></span>
               </div>
-              {/* <div className="form-group-2"> */}
-                {/* <span className="icon-map-pin"></span> */}
-                {/* <SelectLocation /> */}
-              {/* </div> */}
-              <div className="form-group-3">
+              <div className="form-group-2">
+                <span className="icon-map-pin"></span>
+                {Array.isArray(jobLocations) && (
+                  <SelectLocation
+                    setLocation={(value) =>
+                      setSearchObject({
+                        ...searchObject,
+                        keyword: value,
+                      })
+                    }
+                    locations={jobLocations}
+                  />
+                )}
+              </div>
+              {/* <div className="form-group-3">
                 <span className="icon-filter"></span>
                 <div
                   className={`filter-radio ${isOpen ? "open" : ""}`}
@@ -37,8 +66,8 @@ function FormSearch(props) {
                 >
                   <p>Filter More</p>
                 </div>
-              </div>
-              <div
+              </div> */}
+              {/* <div
                 className={`wd-filter-radio ${
                   isOpen ? "modal-menu--open" : ""
                 }`}
@@ -285,12 +314,17 @@ function FormSearch(props) {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="form-group-4">
-                <button className="btn btn-find">Find Jobs</button>
+                <button
+                  type="button"
+                  onClick={handleClick}
+                  className="btn text-white font-semibold shadow-md h-[50px] bg-[#a83359] hover:bg-[#ce406d]"
+                >
+                  Find Jobs
+                </button>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </section>

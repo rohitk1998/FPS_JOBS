@@ -1,30 +1,17 @@
-import Reac, { useState } from "react";
-import PropTypes from "prop-types";
+import Reac, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import "swiper/css/bundle";
-import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import 'swiper/css/bundle';
+import { Link, useNavigate } from 'react-router-dom';
 
 Category07.propTypes = {};
 
 function Category07(props) {
-  const [dataList] = useState([
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 4,
-    },
-  ]);
-
   const { data } = props;
+  const [active, setActive] = useState(0);
+  const navigate = useNavigate();
   return (
     <section className="testimonials-category-section">
       <div className="tf-container">
@@ -39,38 +26,50 @@ function Category07(props) {
           </div>
 
           <div className=" col-md-12">
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={0}
-              slidesPerView={1}
-              pagination={{ clickable: true }}
-              loop
-              className="tes-category-job"
-            >
-              {dataList.map((idx) => (
-                <SwiperSlide key={idx.id}>
-                  <div className="group-category-job padding wow fadeInUp">
-                    {data.map((idx) => (
-                      <div
-                        key={idx.id}
-                        className={`job-category-box ${idx.active}`}
+            <div className="group-category-job padding wow fadeInUp">
+              {data.map((idx) => (
+                <div
+                  key={idx.id}
+                  className={`job-category-box ${
+                    active == idx.ID ? 'active' : ''
+                  } hover:scale-110 transition-all`}
+                  onMouseEnter={() => setActive(idx.ID)}
+                >
+                  <div className="w-[100%] h-[140px] flex justify-between items-start flex-col hover:scale-110 transition-all" >
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <img
+                        src={idx.image}
+                        alt="img"
+                        className="w-[60px] h-[60px]"
+                      />
+                      <p
+                        className="ml-5 font-bold"
+                        style={{
+                          fontSize: '20px',
+                          lineHeight: '30px',
+                          color: active == idx.ID ? '#a83359' : 'black',
+                        }}
                       >
-                        <div className="job-category-header">
-                          <h1>
-                            <Link to="/joblist_v1">{idx.title}</Link>
-                          </h1>
-                          <p>{idx.unit}</p>
-                        </div>
-                        <Link to="/joblist_v1" className="btn-category-job">
-                          Explore Jobs
-                          <span className="icon-keyboard_arrow_right"></span>
-                        </Link>
-                      </div>
-                    ))}
+                        {idx.category}
+                      </p>
+                    </div>
+                    <div className="w-[100%] mt-4">
+                      <Link className="btn-category-job" onClick={()=> navigate('/')}>
+                        Explore Jobs
+                        <span className="icon-keyboard_arrow_right"></span>
+                      </Link>
+                    </div>
                   </div>
-                </SwiperSlide>
+                  <div />
+                </div>
               ))}
-            </Swiper>
+            </div>
           </div>
         </div>
       </div>

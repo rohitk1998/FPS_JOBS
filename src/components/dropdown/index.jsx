@@ -8,7 +8,7 @@ const options = [
   { value: "op4", label: "England" },
 ];
 
-function SelectLocation({ locations }) {
+function SelectLocation({ locations,setLocation }) {
   const options =
     locations &&
     locations.map((item) => ({
@@ -20,6 +20,7 @@ function SelectLocation({ locations }) {
       options={options}
       className="react-dropdown select-location"
       value={"Select Location"}
+      onChange={(event)=> setLocation(event)}
     />
   );
 }
