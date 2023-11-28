@@ -1,14 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import Button2 from "../button/Button2";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Button2 from '../button/Button2';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllJobsByJobTitle } from '../../redux/thunk/app.thunk';
+import { setfeaturedJobs } from '../../redux/slice/app.slice';
+import Preloader from '../preloader';
 
 Job07.propTypes = {};
 
 function Job07(props) {
   const { data } = props;
   const { className } = props;
+  const { featuredJobs } = useSelector((state) => state.app);
+  const [title, setTitle] = useState('Physics Faculty');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setfeaturedJobs([]));
+    let data = {
+      UID: 65534,
+      pageNo: 2,
+      limit: 10,
+      title: title,
+    };
+    dispatch(getAllJobsByJobTitle(data));
+  }, [title]);
+
   return (
     <section className={className}>
       <Tabs className="wrap-testimonials style-1 over-flow-hidden tf-tab">
@@ -19,269 +39,48 @@ function Job07(props) {
               <p>Find the right career opportunity for you</p>
             </div>
             <TabList className="menu-tab">
-              <Tab className="user-tag">UI UX Design</Tab>
-              <Tab className="user-tag">Project Manager</Tab>
-              <Tab className="user-tag">Sales & Marketing</Tab>
-              <Tab className="user-tag">Accounting</Tab>
-              <Tab className="user-tag">Other</Tab>
+              <Tab
+                className="user-tag"
+                onClick={() => setTitle('Physics Faculty')}
+              >
+                Physics Faculty
+              </Tab>
+              <Tab className="user-tag" onClick={() => setTitle('HR')}>
+                HR Manager
+              </Tab>
+              <Tab className="user-tag" onClick={() => setTitle('')}>
+                Other
+              </Tab>
             </TabList>
           </div>
-          <div className="content-tab">
-            <TabPanel className="row wow fadeInUp animation-tab job-tab-item">
-              {data.slice(0, 9).map((idx) => (
-                <div key={idx.id} className="col-lg-4 ">
-                  <div className="features-job">
-                    <div className="job-archive-header">
-                      <div className="inner-box">
-                        <div className="logo-company">
-                          <img src={idx.img} alt="jobtex" />
-                        </div>
-                        <div className="box-content">
-                          <h4>
-                            <Link to="/Jobsingle_v1">{idx.cate}</Link>
-                          </h4>
-                          <h3>
-                            <Link to="/Jobsingle_v1"> {idx.title} </Link>
-                            <span className="icon-bolt"></span>
-                          </h3>
-                          <ul>
-                            <li>
-                              <span className="icon-map-pin"></span>
-                              &nbsp;
-                              {idx.map}
-                            </li>
-                            <li>
-                              <span className="icon-calendar"></span>
-                              &nbsp;
-                              {idx.time}
-                            </li>
-                          </ul>
-                          <span className="icon-heart"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="job-archive-footer">
-                      <div className="job-footer-left">
-                        <ul className="job-tag">
-                          <li>
-                            <Link to="#">{idx.jobs1}</Link>
-                          </li>
-                          <li>
-                            <Link to="#">{idx.jobs2}</Link>
-                          </li>
-                        </ul>
-                        <div className="star">
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                        </div>
-                      </div>
-                      <div className="job-footer-right">
-                        <div className="price">
-                          <span className="icon-dolar1"></span>
-                          <p>
-                            {idx.price}
-                            <span className="year">/year</span>
-                          </p>
-                        </div>
-                        <p className="days">{idx.apply}</p>
-                      </div>
-                    </div>
-                    <Link
-                      to="/Jobsingle_v1"
-                      className="jobtex-link-item"
-                      tabIndex="0"
-                    ></Link>
-                  </div>
-                </div>
-              ))}
-              <div className="col-md-12">
-                <div className="wrap-button">
-                  <Button2 title="See more Jobs" link="/joblist_v1" />
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel className="row wow fadeInUp animation-tab job-tab-item">
-              {data.slice(0, 9).map((idx) => (
-                <div key={idx.id} className="col-lg-4 ">
-                  <div className="features-job">
-                    <div className="job-archive-header">
-                      <div className="inner-box">
-                        <div className="logo-company">
-                          <img src={idx.img} alt="jobtex" />
-                        </div>
-                        <div className="box-content">
-                          <h4>
-                            <Link to="/Jobsingle_v1">{idx.cate}</Link>
-                          </h4>
-                          <h3>
-                            <Link to="/Jobsingle_v1"> {idx.title} </Link>
-                            <span className="icon-bolt"></span>
-                          </h3>
-                          <ul>
-                            <li>
-                              <span className="icon-map-pin"></span>
-                              &nbsp;
-                              {idx.map}
-                            </li>
-                            <li>
-                              <span className="icon-calendar"></span>
-                              &nbsp;
-                              {idx.time}
-                            </li>
-                          </ul>
-                          <span className="icon-heart"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="job-archive-footer">
-                      <div className="job-footer-left">
-                        <ul className="job-tag">
-                          <li>
-                            <Link to="#">{idx.jobs1}</Link>
-                          </li>
-                          <li>
-                            <Link to="#">{idx.jobs2}</Link>
-                          </li>
-                        </ul>
-                        <div className="star">
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                        </div>
-                      </div>
-                      <div className="job-footer-right">
-                        <div className="price">
-                          <span className="icon-dolar1"></span>
-                          <p>
-                            {idx.price}
-                            <span className="year">/year</span>
-                          </p>
-                        </div>
-                        <p className="days">{idx.apply}</p>
-                      </div>
-                    </div>
-                    <Link
-                      to="/Jobsingle_v1"
-                      className="jobtex-link-item"
-                      tabIndex="0"
-                    ></Link>
-                  </div>
-                </div>
-              ))}
-              <div className="col-md-12">
-                <div className="wrap-button">
-                  <Button2 title="See more Jobs" link="/joblist_v1" />
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel className="row wow fadeInUp animation-tab job-tab-item">
-              {data.slice(0, 9).map((idx) => (
-                <div key={idx.id} className="col-lg-4 ">
-                  <div className="features-job">
-                    <div className="job-archive-header">
-                      <div className="inner-box">
-                        <div className="logo-company">
-                          <img src={idx.img} alt="jobtex" />
-                        </div>
-                        <div className="box-content">
-                          <h4>
-                            <Link to="/Jobsingle_v1">{idx.cate}</Link>
-                          </h4>
-                          <h3>
-                            <Link to="/Jobsingle_v1"> {idx.title} </Link>
-                            <span className="icon-bolt"></span>
-                          </h3>
-                          <ul>
-                            <li>
-                              <span className="icon-map-pin"></span>
-                              &nbsp;
-                              {idx.map}
-                            </li>
-                            <li>
-                              <span className="icon-calendar"></span>
-                              &nbsp;
-                              {idx.time}
-                            </li>
-                          </ul>
-                          <span className="icon-heart"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="job-archive-footer">
-                      <div className="job-footer-left">
-                        <ul className="job-tag">
-                          <li>
-                            <Link to="#">{idx.jobs1}</Link>
-                          </li>
-                          <li>
-                            <Link to="#">{idx.jobs2}</Link>
-                          </li>
-                        </ul>
-                        <div className="star">
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                          <span className="icon-star-full"></span>
-                        </div>
-                      </div>
-                      <div className="job-footer-right">
-                        <div className="price">
-                          <span className="icon-dolar1"></span>
-                          <p>
-                            {idx.price}
-                            <span className="year">/year</span>
-                          </p>
-                        </div>
-                        <p className="days">{idx.apply}</p>
-                      </div>
-                    </div>
-                    <Link
-                      to="/Jobsingle_v1"
-                      className="jobtex-link-item"
-                      tabIndex="0"
-                    ></Link>
-                  </div>
-                </div>
-              ))}
-              <div className="col-md-12">
-                <div className="wrap-button">
-                  <Button2 title="See more Jobs" link="/joblist_v1" />
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel className="row wow fadeInUp animation-tab job-tab-item">
-              {data.slice(0, 9).map((idx) => (
+          <TabPanel className="row wow fadeInUp animation-tab job-tab-item min-h-[40vh]">
+            {Array.isArray(featuredJobs) && featuredJobs.length > 0 ? (
+              featuredJobs.map((idx) => (
                 <div key={idx.id} className="col-lg-4">
-                  <div className="features-job">
+                  <div className="features-job min-h-[230px]">
                     <div className="job-archive-header">
                       <div className="inner-box">
-                        <div className="logo-company">
-                          <img src={idx.img} alt="jobtex" />
-                        </div>
+                        {/* <div className="logo-company">
+                            <img src={idx.img} alt="jobtex" />
+                          </div> */}
                         <div className="box-content">
                           <h4>
-                            <Link to="/Jobsingle_v1">{idx.cate}</Link>
+                            <Link>{idx.cate}</Link>
                           </h4>
                           <h3>
-                            <Link to="/Jobsingle_v1"> {idx.title} </Link>
+                            <Link> {idx.job_title} </Link>
                             <span className="icon-bolt"></span>
                           </h3>
                           <ul>
                             <li>
                               <span className="icon-map-pin"></span>
                               &nbsp;
-                              {idx.map}
+                              {idx.process_location.slice(0, 12)}
                             </li>
                             <li>
                               <span className="icon-calendar"></span>
                               &nbsp;
-                              {idx.time}
+                              {idx.created_at}
                             </li>
                           </ul>
                           <span className="icon-heart"></span>
@@ -292,11 +91,11 @@ function Job07(props) {
                       <div className="job-footer-left">
                         <ul className="job-tag">
                           <li>
-                            <Link to="#">{idx.jobs1}</Link>
+                            <Link to="#">{idx.job_type}</Link>
                           </li>
-                          <li>
-                            <Link to="#">{idx.jobs2}</Link>
-                          </li>
+                          {/* <li>
+                              <Link to="#">{idx.jobs2}</Link>
+                            </li> */}
                         </ul>
                         <div className="star">
                           <span className="icon-star-full"></span>
@@ -309,55 +108,52 @@ function Job07(props) {
                       <div className="job-footer-right">
                         <div className="price">
                           <span className="icon-dolar1"></span>
-                          <p>
-                            {idx.price}
-                            <span className="year">/year</span>
-                          </p>
+                          <p>{idx.salary_unit}</p>
                         </div>
                         <p className="days">{idx.apply}</p>
                       </div>
                     </div>
-                    <Link
-                      to="/Jobsingle_v1"
-                      className="jobtex-link-item"
-                      tabIndex="0"
-                    ></Link>
+                    <Link className="jobtex-link-item" tabIndex="0"></Link>
                   </div>
                 </div>
-              ))}
-              <div className="col-md-12">
+              ))
+            ) : (
+              <Preloader />
+            )}
+            {/* <div className="col-md-12">
                 <div className="wrap-button">
                   <Button2 title="See more Jobs" link="/joblist_v1" />
                 </div>
-              </div>
-            </TabPanel>
-            <TabPanel className="row wow fadeInUp animation-tab job-tab-item">
-              {data.slice(0, 9).map((idx) => (
+              </div> */}
+          </TabPanel>
+          <TabPanel className="row wow fadeInUp animation-tab job-tab-item min-h-[40vh]">
+            {Array.isArray(featuredJobs) && featuredJobs.length > 0 ? (
+              featuredJobs.map((idx) => (
                 <div key={idx.id} className="col-lg-4">
-                  <div className="features-job">
+                  <div className="features-job min-h-[230px]">
                     <div className="job-archive-header">
                       <div className="inner-box">
-                        <div className="logo-company">
-                          <img src={idx.img} alt="jobtex" />
-                        </div>
+                        {/* <div className="logo-company">
+                            <img src={idx.img} alt="jobtex" />
+                          </div> */}
                         <div className="box-content">
                           <h4>
-                            <Link to="/Jobsingle_v1">{idx.cate}</Link>
+                            <Link>{idx.cate}</Link>
                           </h4>
                           <h3>
-                            <Link to="/Jobsingle_v1"> {idx.title} </Link>
+                            <Link> {idx.job_title} </Link>
                             <span className="icon-bolt"></span>
                           </h3>
                           <ul>
                             <li>
                               <span className="icon-map-pin"></span>
                               &nbsp;
-                              {idx.map}
+                              {idx.process_location.slice(0, 12)}
                             </li>
                             <li>
                               <span className="icon-calendar"></span>
                               &nbsp;
-                              {idx.time}
+                              {idx.created_at}
                             </li>
                           </ul>
                           <span className="icon-heart"></span>
@@ -368,11 +164,11 @@ function Job07(props) {
                       <div className="job-footer-left">
                         <ul className="job-tag">
                           <li>
-                            <Link to="#">{idx.jobs1}</Link>
+                            <Link to="#">{idx.job_type}</Link>
                           </li>
-                          <li>
-                            <Link to="#">{idx.jobs2}</Link>
-                          </li>
+                          {/* <li>
+                              <Link to="#">{idx.jobs2}</Link>
+                            </li> */}
                         </ul>
                         <div className="star">
                           <span className="icon-star-full"></span>
@@ -385,29 +181,97 @@ function Job07(props) {
                       <div className="job-footer-right">
                         <div className="price">
                           <span className="icon-dolar1"></span>
-                          <p>
-                            {idx.price}
-                            <span className="year">/year</span>
-                          </p>
+                          <p>{idx.salary_unit}</p>
                         </div>
                         <p className="days">{idx.apply}</p>
                       </div>
                     </div>
-                    <Link
-                      to="/Jobsingle_v1"
-                      className="jobtex-link-item"
-                      tabIndex="0"
-                    ></Link>
+                    <Link className="jobtex-link-item" tabIndex="0"></Link>
                   </div>
                 </div>
-              ))}
-              <div className="col-md-12">
+              ))
+            ) : (
+              <Preloader />
+            )}
+            {/* <div className="col-md-12">
                 <div className="wrap-button">
                   <Button2 title="See more Jobs" link="/joblist_v1" />
                 </div>
-              </div>
-            </TabPanel>
-          </div>
+              </div> */}
+          </TabPanel>
+          <TabPanel className="row wow fadeInUp animation-tab job-tab-item min-h-[40vh]">
+            {Array.isArray(featuredJobs) && featuredJobs.length > 0 ? (
+              featuredJobs.map((idx) => (
+                <div key={idx.id} className="col-lg-4">
+                  <div className="features-job min-h-[230px]">
+                    <div className="job-archive-header">
+                      <div className="inner-box">
+                        {/* <div className="logo-company">
+                            <img src={idx.img} alt="jobtex" />
+                          </div> */}
+                        <div className="box-content">
+                          <h4>
+                            <Link>{idx.cate}</Link>
+                          </h4>
+                          <h3>
+                            <Link> {idx.job_title} </Link>
+                            <span className="icon-bolt"></span>
+                          </h3>
+                          <ul>
+                            <li>
+                              <span className="icon-map-pin"></span>
+                              &nbsp;
+                              {idx.process_location.slice(0, 12)}
+                            </li>
+                            <li>
+                              <span className="icon-calendar"></span>
+                              &nbsp;
+                              {idx.created_at}
+                            </li>
+                          </ul>
+                          <span className="icon-heart"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="job-archive-footer">
+                      <div className="job-footer-left">
+                        <ul className="job-tag">
+                          <li>
+                            <Link to="#">{idx.job_type}</Link>
+                          </li>
+                          {/* <li>
+                              <Link to="#">{idx.jobs2}</Link>
+                            </li> */}
+                        </ul>
+                        <div className="star">
+                          <span className="icon-star-full"></span>
+                          <span className="icon-star-full"></span>
+                          <span className="icon-star-full"></span>
+                          <span className="icon-star-full"></span>
+                          <span className="icon-star-full"></span>
+                        </div>
+                      </div>
+                      <div className="job-footer-right">
+                        <div className="price">
+                          <span className="icon-dolar1"></span>
+                          <p>{idx.salary_unit}</p>
+                        </div>
+                        <p className="days">{idx.apply}</p>
+                      </div>
+                    </div>
+                    <Link className="jobtex-link-item" tabIndex="0"></Link>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <Preloader />
+            )}
+            {/* <div className="col-md-12">
+                <div className="wrap-button">
+                  <Button2 title="See more Jobs" link="/joblist_v1" />
+                </div>
+              </div> */}
+          </TabPanel>
         </div>
       </Tabs>
     </section>

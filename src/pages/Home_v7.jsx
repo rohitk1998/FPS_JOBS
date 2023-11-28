@@ -15,11 +15,15 @@ import dataPartner from '../assets/fakeData/dataPartner';
 import { Layout } from '../components/Layout';
 import PromoImg from '../assets/images/home/promo-img-bg.jpg';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllJobsByJobTitle } from '../redux/thunk/app.thunk';
 
 Home_v7.propTypes = {};
 
 function Home_v7(props) {
+  const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
+  
   const [toggle, setToggle] = useState({
     key: '',
     status: false,
@@ -58,17 +62,13 @@ function Home_v7(props) {
   return (
     <Layout>
       <Banner07 />
-      <Category07 data={dataCate} />
-
+      <Category07 data={categories} />
       <Job07 data={dataJobs} className="jobs-section" />
-
       {/* <Location data={dataLocation} /> */}
-      <Box07 />
-
+      {/* <Box07 /> */}
       {/* <div className="container">
         <Couter className="background1" />
       </div> */}
-
       {/* <Blog01 data={dataBlog} className="news-section" /> */}
       {/* <Partner data={dataPartner} /> */}
       <div className="relative flex flex-col w-[100%] items-start justify-start mb-20 mt-10 h-[500px]">

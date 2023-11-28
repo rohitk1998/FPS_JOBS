@@ -12,3 +12,4 @@ export const verificationOtp = 'varification-otp';
 export const categoryList = 'category-list'
 export const categorySubject = 'subjects';
 export const jobsList = 'v2/searchJobs';
+export const jobFilter = 'v2/Jobs_filter'

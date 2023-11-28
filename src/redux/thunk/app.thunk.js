@@ -1,8 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiHandler } from '../../services/api';
-import { categoryList, categorySubject } from '../../services/api/constants';
+import {
+  categoryList,
+  categorySubject,
+  jobFilter,
+} from '../../services/api/constants';
 import { setToast } from '../slice/toast.slice';
-import { setCategories, setSubjects } from '../slice/app.slice';
+import {
+  setCategories,
+  setSubjects,
+  setfeaturedJobs,
+} from '../slice/app.slice';
 
 export const getCategories = createAsyncThunk(
   'appSlice/getCategories',
@@ -61,6 +69,32 @@ export const getCategorySubjects = createAsyncThunk(
         );
       }
       throw error;
+    }
+  }
+);
+
+export const getAllJobsByJobTitle = createAsyncThunk(
+  'appSlice/getAllJobsByJobTitle',
+  async (data, { dispatch }) => {
+    console.log('getAllJobsByJobTitle API CALL STARTED', data);
+    try {
+      const response = await apiHandler(`${jobFilter}`, 'POST', data);
+      if (response.data.status == 'success') {
+        console.log('DATA IN getAllJobsByJobTitle', response.data);
+        dispatch(setfeaturedJobs(response.data.jobs));
+      }
+    } catch (error) {
+      console.log('else error ');
+      console.log('ERROR IN getAllJobsByJobTitle API', error);
+      if (error?.data) {
+        dispatch(
+          setToast({
+            message: error.data,
+            success: false,
+            error: true,
+          })
+        );
+      }
     }
   }
 );

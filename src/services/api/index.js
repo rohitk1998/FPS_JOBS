@@ -24,6 +24,7 @@ async function apiHandler(path, method = "GET", params = {}, Headers) {
 
     case "POST":
       try {
+        console.log("headers",headers);
         return await axios
           .post(`${process.env.REACT_APP_API_URL}/${path}`, params, {
             headers: headers,
