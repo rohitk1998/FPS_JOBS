@@ -23,7 +23,7 @@ Home_v7.propTypes = {};
 function Home_v7(props) {
   const { categories } = useSelector((state) => state.app);
   const navigate = useNavigate();
-  
+
   const [toggle, setToggle] = useState({
     key: '',
     status: false,
@@ -97,7 +97,7 @@ function Home_v7(props) {
                   state: { name: '', keyword: { value: '' } },
                 })
               }
-              className="bg-[#a83359] hover:bg-[#ce406d] rounded-lg w-[150px] min-w-[130px] h-[50px] p-2 text-white border-none shadow-sm"
+              className="font-semibold bg-[#a83359] hover:bg-[#ce406d] rounded-lg w-[150px] min-w-[130px] h-[50px] p-2 text-white border-none shadow-sm"
             >
               Job Offers
             </button>

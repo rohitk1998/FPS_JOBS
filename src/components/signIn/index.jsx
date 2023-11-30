@@ -40,12 +40,14 @@ function SignIn() {
           <Input
             label="Email"
             name="email"
+            type={'text'}
             register={register}
             error={errors?.email?.message}
           />
           <Input
             label="Password"
             name="password"
+            type={'password'}
             register={register}
             error={errors?.password?.message}
           />
