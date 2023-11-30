@@ -27,48 +27,65 @@ function Category07(props) {
 
           <div className=" col-md-12">
             <div className="group-category-job padding wow fadeInUp">
-              {data.map((idx) => (
-                <div
-                  key={idx.id}
-                  className={`job-category-box ${
-                    active == idx.ID ? 'active' : ''
-                  } hover:scale-110 transition-all`}
-                  onMouseEnter={() => setActive(idx.ID)}
-                >
-                  <div className="w-[100%] h-[140px] flex justify-between items-start flex-col hover:scale-110 transition-all" >
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <img
-                        src={idx.image}
-                        alt="img"
-                        className="w-[60px] h-[60px]"
-                      />
-                      <p
-                        className="ml-5 font-bold"
+              {Array.isArray(data) &&
+                data.map((idx) => (
+                  <div
+                    key={idx.id}
+                    className={`job-category-box ${
+                      active == idx.ID ? 'active' : ''
+                    } hover:scale-110 transition-all`}
+                    onMouseEnter={() => setActive(idx.ID)}
+                  >
+                    <div className="w-[100%] h-[140px] flex justify-between items-start flex-col hover:scale-110 transition-all">
+                      <div
                         style={{
-                          fontSize: '20px',
-                          lineHeight: '30px',
-                          color: active == idx.ID ? '#a83359' : 'black',
+                          display: 'flex',
+                          justifyContent: 'flex-start',
+                          alignItems: 'center',
                         }}
                       >
-                        {idx.category}
-                      </p>
+                        <img
+                          src={idx.image}
+                          alt="img"
+                          className="w-[60px] h-[60px]"
+                        />
+                        <p
+                          className="ml-5 font-bold"
+                          style={{
+                            fontSize: '20px',
+                            lineHeight: '30px',
+                            color: active == idx.ID ? '#a83359' : 'black',
+                          }}
+                          onClick={() =>
+                            navigate('/subjects', {
+                              state: { categoryId: idx.ID },
+                            })
+                          }
+                          onKeyDown={() =>
+                            console.log('Category Selected', idx.ID)
+                          }
+                        >
+                          {idx.category}
+                        </p>
+                      </div>
+                      <div className="w-[100%] mt-4"
+                       onClick={() =>
+                        navigate('/subjects', {
+                          state: { categoryId: idx.ID },
+                        })
+                      }
+                      >
+                        <Link
+                          className="btn-category-job"
+                        >
+                          Explore Subjects
+                          <span className="icon-keyboard_arrow_right"></span>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="w-[100%] mt-4">
-                      <Link className="btn-category-job" onClick={()=> navigate('/')}>
-                        Explore Jobs
-                        <span className="icon-keyboard_arrow_right"></span>
-                      </Link>
-                    </div>
+                    <div />
                   </div>
-                  <div />
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@ function Header2({ clname = '', handleMobile }) {
             <div className="sticky-area-wrap">
               <div
                 className="header-ct-left "
-                onMouseEnter={() => dispatch(setSubjects([]))}
+                // onMouseEnter={() => dispatch(setSubjects([]))}
               >
                 <div id="logo" className="logo">
                   <Link to="/">
@@ -65,7 +65,7 @@ function Header2({ clname = '', handleMobile }) {
                   <div className="sub-categorie">
                     <ul className="pop-up">
                       {Array.isArray(categories) &&
-                        categories.map((category) => {
+                        categories?.map((category) => {
                           return (
                             <li>
                               <Link

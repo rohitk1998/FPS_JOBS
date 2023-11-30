@@ -51,6 +51,7 @@ import { PublicRoute } from './routes/publicRoute';
 import { useSelector } from 'react-redux';
 import { CustomToast } from './components/CustomToast';
 import Jobs from './components/jobs';
+import Subjects from './components/jobs/Subjects';
 
 const App = () => {
   let privateRoute = [
@@ -63,7 +64,6 @@ const App = () => {
     // { path: "/joblist_v9", element: <Joblist_v9 /> },
     // { path: "/joblist_v10", element: <Joblist_v10 /> },
     { path: '/jobSingle', element: <JobSingle /> },
-    // { path: "/jobsingle_v2", element: <Jobsingle_v2 /> },
     { path: '/employers_v1', element: <Employer_v1 /> },
     { path: '/employers_v2', element: <Employer_v2 /> },
     { path: '/employers_v3', element: <Employer_v3 /> },
@@ -127,6 +127,7 @@ const App = () => {
           ))}
         </Route>
         <Route path="/jobs" element={<JobList />} exact />
+        <Route path="/subjects" element={<Subjects />} exact />
       </Routes>
       <CustomToast success={success} error={error} message={message} />
     </div>

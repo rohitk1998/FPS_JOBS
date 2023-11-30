@@ -196,9 +196,9 @@ function SignUp() {
     <section className="account-section">
       <div>
         <div className="flex flex-col items-center justify-center gap-4 xl:h-[70vh] lg:h-[70vh] md:h-[70vh] sm:h-auto h-auto">
-          <h4 className="text-2xl font-bold">Register Your Account</h4>
+          <h4 className="text-2xl font-bold text-center">Register Your Account</h4>
           <form
-            className="flex flex-col gap-4 w-[80%] mt-10"
+            className="flex flex-col gap-4 w-[90%] lg:w-[70%] 2xl:w-[70%] mt-10"
             onSubmit={handleSubmit(submitHandler)}
           >
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -229,12 +229,14 @@ function SignUp() {
               <Input
                 label="Password"
                 name="password"
+                type={'password'}
                 register={register}
                 error={errors?.password?.message}
               />
               <Input
                 label="Confirm Password"
                 name="confirm_password"
+                type={'password'}
                 register={register}
                 error={errors?.confirm_password?.message}
               />
@@ -284,13 +286,13 @@ function SignUp() {
             <div className="flex justify-center mt-10">
               <button
                 type="submit"
-                className="w-[50%] shadow-md h-[50px] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
+                className="w-[50%] min-w-[120px] shadow-md h-[50px] bg-[#a83359] hover:bg-[#ce406d] p-2 text-white border-none rounded font-semibold"
               >
                 Register
               </button>
             </div>
           </form>
-          <h2 className="font-semibold">
+          <h2 className="font-semibold text-center">
             Already have an account?{' '}
             <Link to={'/login'} className="font-semibold text-[#a83359]">
               Sign in
