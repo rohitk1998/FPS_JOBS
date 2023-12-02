@@ -54,8 +54,8 @@ function Job07(props) {
             </TabList>
           </div>
           <TabPanel className="row wow fadeInUp animation-tab job-tab-item min-h-[40vh]">
-            {Array.isArray(featuredJobs) && featuredJobs.length > 0 ? (
-              featuredJobs.map((idx) => (
+            {Array.isArray(featuredJobs) && featuredJobs.length > 0 && (
+              featuredJobs?.map((idx) => (
                 <div key={idx.id} className="col-lg-4">
                   <div className="features-job min-h-[230px]">
                     <div className="job-archive-header">
@@ -91,7 +91,7 @@ function Job07(props) {
                       <div className="job-footer-left">
                         <ul className="job-tag">
                           <li>
-                            <Link to="#">{idx.job_type}</Link>
+                            <Link className='text-white'>{idx.job_type}</Link>
                           </li>
                           {/* <li>
                               <Link to="#">{idx.jobs2}</Link>
@@ -117,8 +117,6 @@ function Job07(props) {
                   </div>
                 </div>
               ))
-            ) : (
-              <Preloader />
             )}
             {/* <div className="col-md-12">
                 <div className="wrap-button">

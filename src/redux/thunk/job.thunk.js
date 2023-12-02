@@ -9,20 +9,20 @@ export const searchJobs = createAsyncThunk(
   'jobSlice/searchJobs',
   async (data, { dispatch }) => {
     console.log('searchJobs CALL STARTED', data);
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     try {
       const response = await apiHandler(`${jobsList}`, 'POST', data);
       console.log('DATA IN searchJobs', response);
       if (response.data.status == 'success') {
         dispatch(setJobs(response.data.jobs));
-        dispatch(setLoading(false));
+        // dispatch(setLoading(false));
       }
       else{
         dispatch(setJobs([]));
-        dispatch(setLoading(false));
+        // dispatch(setLoading(false));
       }
     } catch (error) {
-      dispatch(setLoading(false));
+      // dispatch(setLoading(false));
       console.log('else error ');
       console.log('ERROR IN searchJobs', error);
       dispatch(
