@@ -64,27 +64,29 @@ function Banner07(props) {
           <div className="col-lg-12">
             <div className="content">
               <div className="text-center heading">
-                <h2 className="text-gray-800 text-md">
+                <h1 className="mb-4 ml-2 text-3xl font-extrabold text-center text-black dark:text-white md:text-4xl lg:text-4xl xl:text-6xl">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#A83359] to-[#C47D8D]">
                   Find the job that fits your life
-                </h2>
+                  </span>{' '}
+                </h1>
                 <p className="text-gray-800 text-md">
                   Resume-Library is a true performance-based job board. Enjoy
                   custom hiring products and access to up to 10,000 new resume
                   registrations daily, with no subscriptions or user licences.
                 </p>
               </div>
-              <div className="icon ic1 ani3">
+              {/* <div className="icon ic1 ani3">
                 <img
                   src={require('../../assets/images/review/icon6.png')}
                   alt="images"
                 />
-              </div>
-              <div className="icon ic2 ani6">
+              </div> */}
+              {/* <div className="icon ic2 ani6">
                 <img
                   src={require('../../assets/images/review/icon5.png')}
                   alt="images"
                 />
-              </div>
+              </div> */}
               <div className="form-sl">
                 <form
                   className="bg-gray-50 rounded-xl"

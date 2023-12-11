@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SortBuy from '../dropdown/SortBuy';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsSuccess } from '../../redux/slice/job.slice';
+import { singleJob } from '../../redux/thunk/job.thunk';
 
 JobSec1.propTypes = {};
 
 function JobSec1(props) {
   const { data } = props;
+
+  const { isSuccess } = useSelector((state)=> state.job)
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  useEffect(()=> {
+    if(isSuccess){
+     navigate('/job')
+     dispatch(setIsSuccess(false))
+    }
+   },[isSuccess])
+
   return (
     <section className="inner-jobs-section">
       <div className="tf-container">
@@ -31,7 +49,7 @@ function JobSec1(props) {
                 {Array.isArray(data) &&
                   data.length > 0 &&
                   data.slice(0, 10).map((idx) => (
-                    <div key={idx.id} className="features-job style-3">
+                    <div key={idx.id} className="features-job style-3" onClick={()=> dispatch(singleJob({ jobId : idx.jobID }))}>
                       <div className="inner-box">
                         <div className="company">
                           {/* <div className="logo-company">

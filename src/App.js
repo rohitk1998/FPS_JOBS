@@ -55,15 +55,6 @@ import Subjects from './components/jobs/Subjects';
 
 const App = () => {
   let privateRoute = [
-    // { path: "/job-grid", element: <Joblist_v2 /> },
-    // { path: "/job-grid-sidebar", element: <Joblist_v4 /> },
-    // { path: "/joblist_v5", element: <Joblist_v5 /> },
-    // { path: "/joblist_v6", element: <Joblist_v6 /> },
-    // { path: "/joblist_v7", element: <Joblist_v7 /> },
-    // { path: "/joblist_v8", element: <Joblist_v8 /> },
-    // { path: "/joblist_v9", element: <Joblist_v9 /> },
-    // { path: "/joblist_v10", element: <Joblist_v10 /> },
-    { path: '/jobSingle', element: <JobSingle /> },
     { path: '/employers_v1', element: <Employer_v1 /> },
     { path: '/employers_v2', element: <Employer_v2 /> },
     { path: '/employers_v3', element: <Employer_v3 /> },
@@ -108,6 +99,7 @@ const App = () => {
   const publicRoutes = [
     { path: '/login', element: <Login /> },
     { path: '/createaccount', element: <CreateAccount /> },
+    { path: '/job', element: <JobSingle /> }
   ];
 
   const { success, error, message } = useSelector((state) => state.toast);

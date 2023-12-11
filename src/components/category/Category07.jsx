@@ -31,7 +31,7 @@ function Category07(props) {
                 data.map((idx) => (
                   <div
                     key={idx.id}
-                    className={`job-category-box ${
+                    className={`job-category-box bg-gradient-to-l from-[#A83359] to-[#C47D8D] ${
                       active == idx.ID ? 'active' : ''
                     } hover:scale-110 transition-all`}
                     onMouseEnter={() => setActive(idx.ID)}
