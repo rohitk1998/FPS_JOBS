@@ -6,6 +6,7 @@ import StarProgress from "../components/progressBar/StarProgress";
 import { useRef, useState, useEffect } from "react";
 
 import { Layout } from "../components/Layout";
+import { useSelector } from "react-redux";
 
 JobSingle.propTypes = {};
 
@@ -24,6 +25,10 @@ const marKers = [
 function JobSingle(props) {
   const progressRef = useRef();
   const [targetHeight, setTargetHeight] = useState(0);
+  const { singleJob } = useSelector((state)=> state.job)
+
+
+  console.log("singleJob",singleJob);
 
   useEffect(() => {
     if (progressRef?.current) {
@@ -48,25 +53,25 @@ function JobSingle(props) {
               <div className="wd-job-author2">
                 <div className="content-left">
                   <div className="thumb">
-                    <img
+                    {/* <img
                       src={require("../assets/images/logo-company/cty4.png")}
                       alt="logo"
-                    />
+                    /> */}
                   </div>
                   <div className="content">
                     <Link to="#" className="category">
-                      Rockstar Games New York
+                      {singleJob?.job_level ? singleJob?.job_level : '-'}
                     </Link>
                     <h6>
                       <Link to="#">
-                        Senior UI/UX Designer{" "}
+                        {singleJob?.job_title ? singleJob?.job_title : '-'}{" "}
                         <span className="icon-bolt"></span>
                       </Link>
                     </h6>
                     <ul className="job-info">
-                      <li>
+                      <li className="flex items-center">
                         <span className="icon-map-pin"></span>
-                        <span>Las Vegas, NV 89107, USA</span>
+                        <div dangerouslySetInnerHTML={{ __html: singleJob?.address ? singleJob?.address : '-' }}></div>
                       </li>
                       <li>
                         <span className="icon-calendar"></span>
@@ -75,10 +80,10 @@ function JobSingle(props) {
                     </ul>
                     <ul className="tags">
                       <li>
-                        <Link to="#">Full-time</Link>
+                        <Link to="#">{singleJob?.job_type ? singleJob?.job_type : '-'}</Link>
                       </li>
                       <li>
-                        <Link to="#">Remote</Link>
+                        <Link to="#">{singleJob?.selection_process ? singleJob?.selection_process : '-'}</Link>
                       </li>
                     </ul>
                   </div>
@@ -98,7 +103,7 @@ function JobSingle(props) {
                   </div>
                   <div className="bottom">
                     <div className="gr-rating">
-                      <p>32 days left to apply</p>
+                      {/* <p>32 days left to apply</p> */}
                       <ul className="list-star">
                         <li className="icon-star-full" />
                         <li className="icon-star-full" />
@@ -108,9 +113,9 @@ function JobSingle(props) {
                       </ul>
                     </div>
                     <div className="price">
-                      <span className="icon-dollar" />
+                    <i className="mt-1 mr-1 text-lg fa fa-inr"></i>
                       <p>
-                        $83,000 - $110,000 <span className="year">/year</span>
+                        {singleJob?.salary_unit ? singleJob?.salary_unit : '-'}
                       </p>
                     </div>
                   </div>
@@ -134,148 +139,7 @@ function JobSingle(props) {
                 <div className="content-tab">
                   <TabPanel className="inner-content animation-tab ">
                     <h5>Full Job Description</h5>
-                    <p>
-                      Are you a User Experience Designer with a track record of
-                      delivering intuitive digital experiences that drive
-                      results? Are you a strategic storyteller and systems
-                      thinker who can concept and craft smart, world-class
-                      campaigns across a variety of mediums?
-                    </p>
-                    <p className="mg-19">
-                      Deloitte's Green Dot Agency is looking to add a Lead User
-                      Experience Designer to our experience design team. We want
-                      a passionate creative who's inspired by new trends and
-                      emerging technologies, and is able to integrate them into
-                      memorable user experiences. A problem solver who is
-                      entrepreneurial, collaborative, hungry, and humble; can
-                      deliver beautifully designed, leading-edge experiences
-                      under tight deadlines; and who has demonstrated proven
-                      expertise.
-                    </p>
-                    <h6>The Work You'll Do:</h6>
-                    <ul className="list-dot">
-                      <li>
-                        Support the Creative Directors and Associate Creative
-                        Directors of experience design to concept and oversee
-                        the production of bold, innovative, award-winning
-                        campaigns and digital experiences.
-                      </li>
-                      <li>
-                        Make strategic and tactical UX decisions related to
-                        design and usability as well as features and functions.
-                      </li>
-                      <li>
-                        Creates low- and high-fidelity wireframes that represent
-                        a user's journey.
-                      </li>
-                      <li>
-                        Effectively pitch wireframes to and solutions to
-                        stakeholders. You'll be the greatest advocate for our
-                        work, but you'll also listen and internalize feedback so
-                        that we can come back with creative that exceeds
-                        expectations.
-                      </li>
-                    </ul>
-                    <h6>What you'll bring:</h6>
-                    <ul className="list-dot mg-bt-15">
-                      <li>
-                        Passion for Human-Centered Design-a drive to make
-                        interactive technology better for people.
-                      </li>
-                      <li>Thorough knowledge of UX/UI best practices.</li>
-                      <li>
-                        Understanding of brand identity and working within a
-                        defined design system as well as contributing to it.
-                      </li>
-                      <li>
-                        A mastery of craft. You dream about color, typography,
-                        and interaction design every day. You are proficient
-                        using tools like Figma and Adobe XD. You can efficiently
-                        use your skill set to develop new designs within
-                        existing and new visual systems and design languages.
-                      </li>
-                      <li>
-                        A portfolio which highlights strong understanding of UX
-                        design including but not limited to: user flows, IA, and
-                        translating customer research, analytics, and insights
-                        into wireframes and high-fidelity designs.
-                      </li>
-                      <li>
-                        Possess problem-solving skills, an investigative
-                        mentality, and a proactive nature-committed to
-                        delivering solutions.
-                      </li>
-                      <li>Possess problem-solving skills</li>
-                    </ul>
-                    <h6>Qualifications:</h6>
-                    <ul className="list-dot mg-bt-15">
-                      <li>
-                        Bachelor's degree preferred, or equivalent experience.
-                      </li>
-                      <li>
-                        At least 5-8 years of experience with UX and UI design.
-                      </li>
-                      <li>
-                        2 years of experience with design thinking or similar
-                        framework that focuses on defining users' needs early.
-                      </li>
-                      <li>
-                        Strong portfolio showing expert concept, layout, and
-                        typographic skills, as well as creativity and ability to
-                        adhere to brand standards.
-                      </li>
-                      <li>
-                        Expertise in Figma, Adobe Creative Cloud suite,
-                        Microsoft suite.
-                      </li>
-                      <li>
-                        Ability to collaborate well with cross-disciplinary
-                        agency team and stakeholders at all levels.
-                      </li>
-                      <li>
-                        Forever learning: Relentless desire to learn and
-                        leverage the latest web technologies.
-                      </li>
-                      <li>
-                        Detail-oriented: You must be highly organized, be able
-                        to multi-task, and meet tight deadlines.
-                      </li>
-                      <li>
-                        Independence: The ability to make things happen with
-                        limited direction. Excellent proactive attitude,
-                        take-charge personality, and "can-do" demeanor.
-                      </li>
-                      <li>
-                        Proficiency with Front-End UI technologies a bonus but
-                        not necessary (such as HTML, CSS, JavaScript).
-                      </li>
-                    </ul>
-                    <p>
-                      For individuals assigned and/or hired to work in Colorado
-                      or Nevada, Deloitte is required by law to include a
-                      reasonable estimate of the compensation range for this
-                      role. This compensation range is specific to the State of
-                      Colorado and the State of Nevada and takes into account
-                      the wide range of factors that are considered in making
-                      compensation decisions including but not limited to skill
-                      sets; experience and training; licensure and
-                      certifications; and other business and organizational
-                      needs. The disclosed range estimate has not been adjusted
-                      for the applicable geographic differential associated with
-                      the location at which the position may be filled. At
-                      Deloitte, it is not typical for an individual to be hired
-                      at or near the top of the range for their role and
-                      compensation decisions are dependent on the facts and
-                      circumstances of each case. A reasonable estimate of the
-                      current range is $86425- $177470.
-                    </p>
-                    <p>
-                      You may also be eligible to participate in a discretionary
-                      annual incentive program, subject to the rules governing
-                      the program, whereby an award, if any, depends on various
-                      factors, including, without limitation, individual and
-                      organizational performance.
-                    </p>
+                    <div className="text-lg" dangerouslySetInnerHTML={{ __html: singleJob?.job_description ? singleJob?.job_description : '-' }}></div>
                     <div className="post-navigation d-flex aln-center">
                       <div className="wd-social d-flex aln-center">
                         <span>Social Profiles:</span>
@@ -346,7 +210,7 @@ function JobSingle(props) {
                       <Gallery />
                     </div> */}
 
-                    <div className="job-rating">
+                    {/* <div className="job-rating">
                       <h6>reviews</h6>
                       <div className="rating-review">
                         <div className="left-rating">
@@ -608,8 +472,8 @@ function JobSingle(props) {
                       <Link to="Joblist_v1" className="btn-load">
                         See more reviews (719)
                       </Link>
-                    </div>
-                    <div className="related-job">
+                    </div> */}
+                    {/* <div className="related-job">
                       <h6>Related Jobs</h6>
                       <div className="features-job mg-bt-0">
                         <div className="job-archive-header">
@@ -806,9 +670,9 @@ function JobSingle(props) {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </TabPanel>
-                  <TabPanel className="inner-content animation-tab">
+                  {/* <TabPanel className="inner-content animation-tab">
                     <h5>Full Job Description</h5>
                     <p>
                       Are you a User Experience Designer with a track record of
@@ -826,7 +690,7 @@ function JobSingle(props) {
                       results? Are you a strategic storyteller and systems
                       thinker who can concept and craft smart.
                     </p>
-                  </TabPanel>
+                  </TabPanel> */}
                 </div>
               </Tabs>
             </div>

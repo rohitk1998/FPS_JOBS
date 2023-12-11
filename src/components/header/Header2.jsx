@@ -90,11 +90,11 @@ function Header2({ clname = '', handleMobile }) {
                                 </div>
                               </Link>
                               {subjects?.length > 0 && (
-                                <div className="flex-wrap absolute top-[0%] left-[100%] bg-white w-[100%] h-[100%] min-w-[300px] overflow-y-scroll">
+                                <div className="flex flex-wrap absolute top-[0%] left-[100%] bg-white w-[100%] h-[100%] min-w-[800px] overflow-y-scroll">
                                   {Array.isArray(subjects) &&
                                     subjects.map((subject) => {
                                       return (
-                                        <div className="mt-3 ml-5">
+                                        <div className="mt-3 ml-5" style={{width:'200px'}}>
                                           <p className="text-[13px] font-normal text-gray-700 font-md">
                                             {subject.function}
                                           </p>

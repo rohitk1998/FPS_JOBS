@@ -55,7 +55,6 @@ import Subjects from './components/jobs/Subjects';
 
 const App = () => {
   let privateRoute = [
-    { path: '/jobSingle', element: <JobSingle /> },
     { path: '/employers_v1', element: <Employer_v1 /> },
     { path: '/employers_v2', element: <Employer_v2 /> },
     { path: '/employers_v3', element: <Employer_v3 /> },
@@ -100,6 +99,7 @@ const App = () => {
   const publicRoutes = [
     { path: '/login', element: <Login /> },
     { path: '/createaccount', element: <CreateAccount /> },
+    { path: '/job', element: <JobSingle /> }
   ];
 
   const { success, error, message } = useSelector((state) => state.toast);
