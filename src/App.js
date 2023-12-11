@@ -99,7 +99,6 @@ const App = () => {
   const publicRoutes = [
     { path: '/login', element: <Login /> },
     { path: '/createaccount', element: <CreateAccount /> },
-    { path: '/job', element: <JobSingle /> }
   ];
 
   const { success, error, message } = useSelector((state) => state.toast);
@@ -120,6 +119,7 @@ const App = () => {
         </Route>
         <Route path="/jobs" element={<JobList />} exact />
         <Route path="/subjects" element={<Subjects />} exact />
+        <Route path="/job" element={<JobSingle />} exact />
       </Routes>
       <CustomToast success={success} error={error} message={message} />
     </div>
